@@ -14,8 +14,7 @@ export default class Showdata extends Component{
             firstname:"",
             lastname:"",
             emial:"",
-            // districtname:"",
-            // provincename:"",
+            id_province:"",
             timestamp:""
         }
         this.handleChang = this.handleChang.bind(this);
@@ -62,8 +61,7 @@ export default class Showdata extends Component{
             firstname:user.firstname,
             lastname:user.lastname,
             emial:user.email,
-            // districtname:user.districtname,
-            // provincename:user.provincename,
+            id_province:user.id_province,
             timestamp:user.timestamp	
         })
     }
@@ -77,8 +75,7 @@ export default class Showdata extends Component{
             firstname:this.state.firstname,
             lastname:this.state.lastname,
             email:this.state.email,
-            // districtname:this.state.districtname,
-            // provincename:this.state.provincename,
+            id_province:this.state.id_province,
             timestamp:this.state.timestamp
         }
         axios.put(url,data)
@@ -91,8 +88,7 @@ export default class Showdata extends Component{
             firstname:this.state.firstname,
             lastname:this.state.lastname,
             email:this.state.email,
-            // districtname:this.state.districtname,
-            // provincename:this.state.provincename,
+            id_province:this.state.id_province,
             timestamp:this.state.timestamp
         }
         axios.put(url,data)
@@ -101,8 +97,7 @@ export default class Showdata extends Component{
             firstname:"",
             lastname:"",
             email:"",
-            // districtname:"",
-            // provincename:"",
+            id_province:"",
             timestamp:""
         });
 	this.closeModal();
@@ -123,8 +118,7 @@ export default class Showdata extends Component{
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Email</th>
-                            {/* <th>District Name</th>
-                            <th>Province Name</th> */}
+                            <th>Province</th>
                             <th>Time</th>
                             </tr>
                         </thead>
@@ -136,8 +130,7 @@ export default class Showdata extends Component{
                                             <td>{user.firstname}</td>
                                             <td>{user.lastname}</td>
                                             <td>{user.email}</td>
-                                            {/* <td>{user.districtname}</td>
-                                            <td>{user.provincename}</td> */}
+                                            <td>{user.nprovince}</td>
                                             <td>{user.timestamp}</td>
                                             <td><button type="button" class="btn btn-warning" onClick={()=>this.call(user)}>Edit</button></td>
                                             <td><button type="button" class="btn btn-danger"  onClick={()=>this.onDelete(user)}>Delete</button></td>
@@ -160,17 +153,13 @@ export default class Showdata extends Component{
                                                             <label>Last Name:</label>
                                                             <input type="text" className="form-control" id="lastname" onChange={this.handleChang} value={this.state.lastname}/>
                                                         </div>
-                                                        {/* <div className="form-group">
-                                                            <label>District Name:</label>
-                                                            <input type="text" className="form-control" id="districtname" onChange={this.handleChang} value={this.state.districtname}/>
-                                                        </div>
-                                                        <div className="form-group">
-                                                            <label>Province Name:</label>
-                                                            <input type="text" className="form-control" id="provincename" onChange={this.handleChang} value={this.state.provincename}/>
-                                                        </div> */}
-                                                        {/* <div className="form-group">
-                                                            <label>Time:</label>
-                                                            <input type="text" className="form-control" id="time" onChange={this.handleChang} value={this.state.timestamp}/>
+                                                        {/* <div>
+                                                            <select className="form-group" id="province" value={this.state.province} onChange={this.handleChang} required>
+                                                                <option value="">Select Province</option>
+                                                                    {this.state.data.map(item => {
+                                                                        return <option value={item.id_province}>{item.nprovince}</option>
+                                                                    })}
+                                                            </select>
                                                         </div> */}
                                                         <button type="button" className="btn btn-primary" onClick={this.handleClicked}>Submit</button>
                                                     </form>
