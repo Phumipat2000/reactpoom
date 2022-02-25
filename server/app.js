@@ -26,7 +26,19 @@ const db = mysql.createConnection({
 // show data
 app.get('/data', function(req,res){
     console.log("Hello in /data ");
-    let sql = 'SELECT * FROM users;';
+    let sql = 'SELECT u.*, np.nprovince FROM users u, north_province np WHERE u.province_id = np.id_province;';
+    db.query(sql, (err, result)=>{
+        if(err) throw err;
+        console.log(result);
+        res.json(result);
+    });
+    console.log("after query");
+});
+
+//province
+app.get('/north_province', function(req,res){
+    console.log("Hello in /data ");
+    let sql = 'SELECT * FROM north_province;';
     db.query(sql, (err, result)=>{
         if(err) throw err;
         console.log(result);
@@ -47,7 +59,7 @@ app.put('/delete', function(req, res) {
 //edit
 app.put('/data', function(req, res) {
     var sql = 'UPDATE users SET firstname= ? , lastname = ?  WHERE id = ?';
-    db.query(sql,[req.body.firstname,req.body.lastname,req.body.idkey],function (error, results) {
+    db.query(sql,[req.body.firstname,req.body.lastname,req.body.id_province,req.body.idkey],function (error, results) {
         if(error) throw error;
         res.send(JSON.stringify(results));
     });
@@ -61,8 +73,7 @@ app.post('/data', function(req, res){
         firstname:req.body.firstname,
         lastname:req.body.lastname,
         email:req.body.email,
-        // districtname:req.body.districtname,
-        // provincename:req.body.provincename
+        province_id:req.body.province,
     };
     let sql = 'INSERT INTO users SET ?';
     db.query(sql, data, (err, result)=>{
