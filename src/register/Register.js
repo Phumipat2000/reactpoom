@@ -9,7 +9,10 @@ class Register extends Component{
         this.state = {
             idkey:"",
             firstname:"",
-            lastname:""
+            lastname:"",
+            email:localStorage.getItem('email'),
+            // districtname:"",
+            // provincename:""
         }
         this.handleChang = this.handleChang.bind(this);
         this.handleClicked = this.handleClicked.bind(this);
@@ -24,13 +27,19 @@ class Register extends Component{
         let data = {
             idkey:this.state.idkey,
             firstname:this.state.firstname,
-            lastname:this.state.lastname
+            lastname:this.state.lastname,
+            email:this.state.email,
+            // districtname:this.state.districtname,
+            // provincename:this.state.provincename
         }
         axios.post(url,data)
         this.setState({
             idkey:"",
             firstname:"",
-            lastname:""
+            lastname:"",
+            email:"",
+            // districtname:"",
+            // provincename:""
         });
         this.props.history.push('/ShowData');
     }
@@ -44,6 +53,10 @@ class Register extends Component{
                 </div>
                 <form className="container">
                     <div className="form-group">
+                        <label className="text-white"  htmlFor="id">ID</label>
+                        <input type="text" className="form-control" size="10" id="idkey" onChange={this.handleChang} value={this.state.idkey}/>
+                    </div>
+                    <div className="form-group">
                         <label className="text-white" >First Name</label>
                         <input type="text" className="form-control" id="firstname" onChange={this.handleChang} value={this.state.firstname}/>
                     </div>
@@ -51,10 +64,14 @@ class Register extends Component{
                         <label className="text-white"  >Last Name</label>
                         <input type="text" className="form-control" id="lastname" onChange={this.handleChang} value={this.state.lastname}/>
                     </div>
-                    <div className="form-group">
-                        <label className="text-white"  htmlFor="id">Id</label>
-                        <input type="text" className="form-control" size="10" id="idkey" onChange={this.handleChang} value={this.state.idkey}/>
+                    {/* <div className="form-group">
+                        <label className="text-white"  >District Name</label>
+                        <input type="text" className="form-control" id="districtname" onChange={this.handleChang} value={this.state.districtname}/>
                     </div>
+                    <div className="form-group">
+                        <label className="text-white"  >Province Name</label>
+                        <input type="text" className="form-control" id="provincename" onChange={this.handleChang} value={this.state.provincename}/>
+                    </div> */}
                     <button type="button" className="btn btn-primary" onClick={this.handleClicked}>Submit</button>
                 </form>
             </div>
