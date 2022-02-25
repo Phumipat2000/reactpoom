@@ -11,8 +11,9 @@ class Register extends Component{
             firstname:"",
             lastname:"",
             email:localStorage.getItem('email'),
-            // districtname:"",
-            // provincename:""
+            province:"",
+            data: []
+
         }
         this.handleChang = this.handleChang.bind(this);
         this.handleClicked = this.handleClicked.bind(this);
@@ -21,6 +22,8 @@ class Register extends Component{
         this.setState({
             [e.target.id]: e.target.value
         });
+        console.log(e.target.id);
+        console.log(e.target.value);
     }
     handleClicked(){
         let url = `https://localhost:3000/data`;
@@ -29,8 +32,7 @@ class Register extends Component{
             firstname:this.state.firstname,
             lastname:this.state.lastname,
             email:this.state.email,
-            // districtname:this.state.districtname,
-            // provincename:this.state.provincename
+            province:this.state.province
         }
         axios.post(url,data)
         this.setState({
@@ -38,10 +40,22 @@ class Register extends Component{
             firstname:"",
             lastname:"",
             email:"",
-            // districtname:"",
-            // provincename:""
+            province:""
         });
         this.props.history.push('/ShowData');
+    }
+
+    componentDidMount() {
+        //console.log("before get data");
+        this.getData();
+        //console.log("after get data");
+    }
+    getData = () => {
+        console.log("before fetch data");
+        fetch('/north_province')
+            .then(res => res.json())
+            .then(list => this.setState({ data:list }))
+        console.log("after fetch data");
     }
 
     render() {
@@ -64,14 +78,14 @@ class Register extends Component{
                         <label className="text-white"  >Last Name</label>
                         <input type="text" className="form-control" id="lastname" onChange={this.handleChang} value={this.state.lastname}/>
                     </div>
-                    {/* <div className="form-group">
-                        <label className="text-white"  >District Name</label>
-                        <input type="text" className="form-control" id="districtname" onChange={this.handleChang} value={this.state.districtname}/>
+                    <div>
+                        <select className="from-group" id="province" value={this.state.province} onChange={this.handleChang} required>
+                            <option value="">Select Province</option>
+                                {this.state.data.map(item => {
+                                    return <option value={item.id_province}>{item.nprovince}</option>
+                                })}
+                        </select>
                     </div>
-                    <div className="form-group">
-                        <label className="text-white"  >Province Name</label>
-                        <input type="text" className="form-control" id="provincename" onChange={this.handleChang} value={this.state.provincename}/>
-                    </div> */}
                     <button type="button" className="btn btn-primary" onClick={this.handleClicked}>Submit</button>
                 </form>
             </div>
