@@ -117,7 +117,7 @@ export default class Showdata extends Component{
                             <th>ID</th>
                             <th>First Name</th>
                             <th>Last Name</th>
-                            <th>Email</th>
+                            <th>Register By</th>
                             <th>Province</th>
                             <th>Time</th>
                             </tr>
