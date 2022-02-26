@@ -18,15 +18,28 @@ app.use(body());
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
 const db = mysql.createConnection({
-    host: '192.168.1.10',
+    host: '192.168.1.9',
     user: 'poom',
     password: '457852146',
     database: 'local'
 });
+
 // show data
 app.get('/data', function(req,res){
     console.log("Hello in /data ");
     let sql = 'SELECT u.*, np.nprovince FROM users u, north_province np WHERE u.province_id = np.id_province;';
+    db.query(sql, (err, result)=>{
+        if(err) throw err;
+        console.log(result);
+        res.json(result);
+    });
+    console.log("after query");
+});
+
+// count province
+app.get('/count_north_province', function(req,res){
+    console.log("Hello in /data ");
+    let sql = 'SELECT north_province.nprovince AS province, COUNT(*) AS total FROM users LEFT JOIN north_province ON users.province_id = north_province.id_province GROUP BY id_province;';
     db.query(sql, (err, result)=>{
         if(err) throw err;
         console.log(result);
@@ -59,7 +72,7 @@ app.put('/delete', function(req, res) {
 //edit
 app.put('/data', function(req, res) {
     var sql = 'UPDATE users SET firstname= ? , lastname = ?  WHERE id = ?';
-    db.query(sql,[req.body.firstname,req.body.lastname,req.body.id_province,req.body.idkey],function (error, results) {
+    db.query(sql,[req.body.firstname,req.body.lastname,req.body.idkey],function (error, results) {
         if(error) throw error;
         res.send(JSON.stringify(results));
     });
