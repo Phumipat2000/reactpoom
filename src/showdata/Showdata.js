@@ -110,7 +110,7 @@ export default class Showdata extends Component{
             <div className="App">
                 <h2 className="my-4">Users Information<br/></h2>
                 <hr/>
-                <div className=" p-3 my-3 bg-dark text-white">
+                <div className="p-3 my-3 bg-dark text-white">
                     <table className="table table-dark">
                         <thead>
                             <tr>
@@ -153,14 +153,6 @@ export default class Showdata extends Component{
                                                             <label>Last Name:</label>
                                                             <input type="text" className="form-control" id="lastname" onChange={this.handleChang} value={this.state.lastname}/>
                                                         </div>
-                                                        {/* <div>
-                                                            <select className="form-group" id="province" value={this.state.province} onChange={this.handleChang} required>
-                                                                <option value="">Select Province</option>
-                                                                    {this.state.data.map(item => {
-                                                                        return <option value={item.id_province}>{item.nprovince}</option>
-                                                                    })}
-                                                            </select>
-                                                        </div> */}
                                                         <button type="button" className="btn btn-primary" onClick={this.handleClicked}>Submit</button>
                                                     </form>
                                                 </Modal>
