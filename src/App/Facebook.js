@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import FacebookLogin from "react-facebook-login";
 import ButtonShowdata from "../showdata/ButtonShowdata";
 import ButtonRegister from "../register/ButtonRegister";
+import ButtonShowCountProvince from "../showdata/ButtonShowCountProvince";
 import './style.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Register from "../register/Register";
 import Showdata from "../showdata/Showdata";
+import ShowCountProvince from "../showdata/ShowCountProvince";
 
 export default class Facebook extends Component {
   state = {
@@ -87,10 +89,11 @@ export default class Facebook extends Component {
  	  email: {this.state.email}
           <div className="my-3"><a className="btn btn-danger" href="/" onClick={this.logoutFacebook}>Logout</a></div>
           <BrowserRouter>
-            <br /><br /><div className="btn-group btn-group-lg"><ButtonRegister /><ButtonShowdata /></div>
+            <br /><br /><div className="btn-group btn-group-lg"><ButtonRegister /><ButtonShowdata /><ButtonShowCountProvince /></div>
             <Switch>
               <Route path='/register' component={Register} />
               <Route path='/showdata' component={Showdata} />
+              <Route path='/ShowCountProvince' component={ShowCountProvince} />
             </Switch>
           </BrowserRouter>
         </div>
